@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('common/adminHeader.ejs')%>
+<body>
+    
+    <!-- ======= Header ======= -->
+  <%- include('common/adminNavbar.ejs')%>
+  <!-- End Header -->
+
+  <!-- ======= Sidebar ======= -->
+  <%- include('common/adminSidebar.ejs')%>
+  <!-- End Sidebar-->
+
+  <main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>Tour Data Approval</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item">Tour</li>
+          <!-- <li class="breadcrumb-item active">Data</li> -->
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section dashboard">
+        <div class="row">
+          <div class="col-lg-12">
+            <table class="table datatable" style="margin-top: 20px;">
+              <thead>
+                <tr>
+                  <th scope="col">User Name</th>
+                  <th scope="col">Training</th>
+                  <th scope="col">Scheme</th>
+                  <th scope="col">Price</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Operations</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% for(let elements of booking){%>
+                  <tr>
+                      <th scope="row"><%=elements.memberId.name%></th>
+                      <td><%=elements.serviceId.service_name%></td>
+                      <td><%=elements.scheme%></td>
+                      <td><%=elements.price%></td>
+                      <%if(elements.isPending==true){%>
+                          <td>Pending</td>
+                      <%}else{%>
+                          <td>Approved</td>
+                      <%}%>
+                      <%if(elements.isPending==true){%>
+                          <td><a href="/admin/approve/<%=elements._id%>" class="btn btn-success">Approve</a></td>
+                      <%}else{%>
+                          <td><a href="/admin/disapprove/<%=elements._id%>" class="btn btn-danger">Disapprove</a></td>
+                      <%}%>
+                    </tr>
+                <%}%>
+              </tbody>
+            </table>
+  
+  
+          </div>
+        </div>
+        </div><!-- End Left side columns -->
+  
+        </div>
+      </section>
+
+
+</main>
+  
+<!-- ======= Footer ======= -->
+<%- include('common/adminFooter.ejs')%>

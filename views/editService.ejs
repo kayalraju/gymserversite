@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('common/adminHeader.ejs')%>
+
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <%- include('common/adminNavbar.ejs')%>
+  <!-- End Header -->
+
+  <!-- ======= Sidebar ======= -->
+  <%- include('common/adminSidebar.ejs')%>
+  <!-- End Sidebar-->
+
+  <main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>Update Data</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item">Service</li>
+          <li class="breadcrumb-item active">Update Data</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+    <section class="section">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Service Data</h5>
+
+              <!-- Vertical Form -->
+              <form action="/admin/serviceupdate" method="post" class="row g-3"  enctype="multipart/form-data">
+                <input type="hidden" name="service_id" value="<%=responseData.service._id%>">
+
+                <label for="trainer">Select Trainer:</label>
+                <select class="form-control" id="trainerId" name="trainerId" required>
+                <% for (let trainer of responseData.trainers) { %>
+                <option value="<%= trainer._id %>" <%= trainer._id.toString() === responseData.service.trainerId.toString() ? 'selected' : '' %>>
+                <%= trainer.name %>
+                </option>
+                <% } %> 
+                </select>
+
+                <div class="col-12">
+                  <label for="inputNanme4" class="form-label">Service</label>
+                  <input type="text" name="service_name" value="<%=responseData.service.service_name%>" class="form-control">
+                </div>
+                <div class="col-12">
+                  <label for="inputNanme4" class="form-label">Description</label>
+                  <input type="text" name="service_description" value="<%=responseData.service.service_description%>" class="form-control">
+                </div>
+                <div class="col-12">
+                  <label for="inputNanme4" class="form-label">Service Image</label>
+                  <br>
+                    <% if (responseData.service.image) { %>
+                        <img src="/<%= responseData.service.image %>" alt="Current Image" class="img-fluid mb-3" style="width: 90px; height: auto;">
+                    <% } else { %>
+                        <p>No image available</p>
+                    <% } %>
+                </div>
+                <div class="col-12">
+                  <label for="inputNanme4" class="form-label">Trainer Image</label>
+                  <input type="file" name="image" accept="image/png, image/jpeg,image/jpg" class="form-control">
+                </div>
+                
+                <div class="text-left">
+                  <button type="submit" class="btn btn-primary">Update Data</button>
+                </div>
+              </form><!-- Vertical Form -->
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+  
+  <!-- End #main -->
+<div style="margin-top: 300px;"></div>
+
+  <!-- ======= Footer ======= -->
+  <%- include('common/adminFooter.ejs')%>

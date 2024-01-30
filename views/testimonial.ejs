@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('common/adminHeader.ejs')%>
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <%- include('common/adminNavbar.ejs')%>
+  <!-- End Header -->
+
+  <!-- ======= Sidebar ======= -->
+  <%- include('common/adminSidebar.ejs')%>
+  <!-- End Sidebar-->
+
+  <main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>Service Content</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item">Service</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section">
+      <div class="row">
+        <div class="col-lg-12">
+
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Services</h5>
+              <a href="/admin/getaddTestimonial" class="btn btn-primary mb-3">Add Data</a>
+
+              <!-- Table with stripped rows -->
+              <table class="table datatable">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Client</th>
+                    <th scope="col">Review</th>
+                    <th scope="col">Service</th>
+                    <th scope="col">Image</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Operation</th> 
+                  </tr>
+                </thead>
+                <tbody>
+                    <%for(let data of result){%>
+                        <tr>
+                            <th scope="row">1</th>
+                            <td><%= data.client_name %></td>
+                            <td><%= data.review %></td>
+                            <td><%= data.serviceId.service_name %></td>
+                            <td><img src="/<%= data.image %>" height="75px" width="75px" alt="banner"></td>
+                            <td>
+                                <% if(data.status==='1') {%> <a href="activeTestimonial/<%=data._id %>" ><i class="bi bi-hand-thumbs-up"style='color: blue;font-size: 30px;'></i></a><%}%>
+                                <% if(data.status==='0') {%> <a href="deactiveTestimonial/<%=data._id %>"> <i class="bi bi-hand-thumbs-down"style='color: red;  font-size: 30px;'></i></a><%}%>
+                            </td>
+                            <td>
+                            <a href="/admin/geteditTestimonial/<%=data._id%>" class="btn btn-primary mb-2">Update</a>
+                            <a href="/admin/deleteTestimonial/<%=data._id%>" class="btn btn-danger">Delete</a>
+                            </td>
+                          </tr>
+                    <%}%>
+                </tbody>
+              </table>
+              <!-- End Table with stripped rows -->
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <%- include('common/adminFooter.ejs')%>
